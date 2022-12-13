@@ -1,25 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Flex from "./components/Flex/Flex";
+import Menu from "./components/Menu";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './App.css';
+import Grid from "./components/Grid/Grid";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#5a6f80',
+      main: '#2f4454',
+      dark: '#051d2b',
+    },
+    secondary: {
+      light: '#ffacc3',
+      main: '#da7b93',
+      dark: '#a64c65',
+      contrastText: '#000',
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/flex" element={
+          <div>
+            <Menu />
+            <Flex/>
+          </div>} />
+        <Route path="grid" element={
+            <div>
+              <Menu />
+              <Grid/>
+          </div>
+        } />
+
+      </Routes>
+      </BrowserRouter></ThemeProvider>
   );
 }
 
